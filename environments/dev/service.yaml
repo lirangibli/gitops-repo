@@ -8,6 +8,6 @@ spec:
     app: contact-us
   ports:
     - protocol: TCP
-      port: 80      # הפורט שהשירות יספק
-      targetPort: 3000  # הפורט שבו האפליקציה מאזינה בתוך הקונטיינר
+      port: 80
+      targetPort: 4000
   type: ClusterIP
