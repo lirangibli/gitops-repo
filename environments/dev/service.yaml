@@ -2,11 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: contact-us
+  namespace: dev
 spec:
   selector:
     app: contact-us
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 3000
+      port: 80      # הפורט שהשירות יספק
+      targetPort: 3000  # הפורט שבו האפליקציה מאזינה בתוך הקונטיינר
   type: ClusterIP
