@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-us
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: contact-us
+  template:
+    metadata:
+      labels:
+        app: contact-us
+    spec:
+      containers:
+        - name: contact-us
+          image: lirangibli/contact-us:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
