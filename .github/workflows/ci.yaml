@@ -10,15 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout GitOps repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit and push changes
+      - name: Get latest image tag from Docker Hub
+        id: get_tag
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add .
-          git commit -m "Auto-sync GitOps repo" || echo "No changes to commit"
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LATEST_TAG=$(curl -s "https://hub.docker.com/v2/repositories/your-dockerhub-username/contact-us/tags/" | jq -r '.results[0].name')
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: Update values.yaml with new image tag
+        run: |
+          sed -i 's|tag:.*|tag: "'"${{ env.LATEST_TAG }}"'"|' environments/dev/values.yaml
