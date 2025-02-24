@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: contact-us
+  namespace: contact-us
 spec:
   replicas: 2
   selector:
@@ -13,10 +14,13 @@ spec:
         app: contact-us
     spec:
       containers:
-        - name: contact-us
-          image: lirangibli/contact-us:latest
-          ports:
-            - containerPort: 3000
-          env:
-            - name: NODE_ENV
-              value: "production"
+      - name: contact-us
+        image: lirangibli/contact-us:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3000"
+
