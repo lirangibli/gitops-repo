@@ -2,19 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: contact-us-ingress
-  namespace: default
+  namespace: contact-us   # ← שים לב שהשורה הזו קיימת
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
   rules:
-  - host: contact-us.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: contact-us-service
-            port:
-              number: 80
+    - host: contact-us.local  # ← זה הכתובת שאתה רוצה לגשת אליה
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: contact-us
+                port:
+                  number: 80
