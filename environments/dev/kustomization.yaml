@@ -4,7 +4,7 @@ metadata:
   name: contact-us
   namespace: contact-us
 spec:
-  interval: 5m0s
+  interval: 5m
   path: ./environments/dev
   prune: true
   sourceRef:
