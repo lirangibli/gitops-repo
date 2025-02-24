@@ -5,16 +5,9 @@ metadata:
   namespace: argocd
 data:
   policy.default: role:readonly
-  policy.csv: |
+  policy.csv: |-
     g, admin, role:admin
     g, developer, role:developer
-  roles:
-    - name: developer
-      description: Developer access
-      policies:
-        - p, role:developer, applications, get, */*, allow
-        - p, role:developer, applications, sync, */*, allow
-    - name: admin
-      description: Full admin access
-      policies:
-        - p, role:admin, *, *, *, allow
+    p, role:developer, applications, get, */*, allow
+    p, role:developer, applications, sync, */*, allow
+    p, role:admin, *, *, *, allow
