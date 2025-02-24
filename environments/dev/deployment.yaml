@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: contact-us
-  namespace: contact-us
 spec:
   replicas: 2
   selector:
@@ -23,4 +22,7 @@ spec:
               value: "production"
             - name: PORT
               value: "4000"
+          envFrom:
+            - secretRef:
+                name: db-credentials
 
