@@ -1,6 +1,25 @@
-resources:
-  - deployment.yaml
-  - service.yaml
-  - ingress.yaml
-
-namespace: dev
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: contact-us
+  namespace: contact-us
+spec:
+  interval: 5m0s
+  path: ./environments/dev
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: gitops-repo
+    namespace: flux-system
+  resources:
+    - deployment.yaml
+    - service.yaml
+    - ingress.yaml
+  patches:
+    - target:
+        kind: Deployment
+        name: contact-us
+      patch: |-
+        - op: replace
+          path: /spec/template/spec/containers/0/image
+          value: lirangibli/contact-us:latest
