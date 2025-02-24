@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: contact-us
-  namespace: contact-us   # ← שים לב שהשורה הזו קיימת
+  namespace: contact-us
 spec:
   selector:
     app: contact-us
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 4000
   type: ClusterIP
