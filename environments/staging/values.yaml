@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contact-us-config
+  namespace: contact-us
+data:
+  IMAGE_REPOSITORY: "your-dockerhub-username/contact-us"
+  IMAGE_TAG: "latest"
+  REPLICA_COUNT: "1"
+  ENV: "staging"
+  PORT: "4000"
